@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechCart - Track Order</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f7f7;
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+        #logo {
+            height: 90px;
+            width: 150px;
+            border-radius: 25px;
+        }
+        .order-status-card {
+            border-left: 4px solid;
+            border-color: #3b82f6; /* Blue-600 */
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: #3b82f6; /* Blue-600 */
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 0.35rem;
+            top: 1rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background-color: #e0e0e0;
+            z-index: 5;
+        }
+        .timeline-item:last-child::after {
+            display: none; /* Hide line for the last item */
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="bg-gray-900 text-white py-2 px-4 text-sm">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex space-x-4">
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                    </svg>
+                   <a href="./location.html"> <span>Select Location</span></a>
+                </div>
+            </div>
+            <div class="flex space-x-6">
+                <a href="customer.html" class="hover:text-blue-300">Customer Service</a>
+                <a href="track.html" class="hover:text-blue-300">Track Order</a>
+                <a href="login.html" class="hover:text-blue-300">Login/Sign Up</a>
+                <a href="cart.html" class="hover:text-blue-300">Cart (0)</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header-gradient text-white">
+        <div class="container mx-auto py-4 px-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="home1.html" class="text-2xl font-bold flex items-center">
+                        <img id="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkpjikmZ7rOEUw3lMn3T-lNNBxF_-TNIgLhQ&s" alt="TechCart electronics store logo with circuit board design" class="mr-2">
+                        <span>TechCart</span>
+                        <link rel="stylesheet" href="home.html">
+                    </a>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="w-1/3 relative mx-4">
+                    <input type="text" placeholder="Search for electronics, components and more..." 
+                           class="w-full py-2 px-4 rounded text-gray-800 focus:outline-none">
+                    <button class="absolute right-0 top-0 h-full px-4 bg-blue-600 rounded-r hover:bg-blue-700">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Cart and Profile -->
+                <div class="flex items-center space-x-6">
+                    <a href="profile.html" class="flex flex-col items-center">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm">Profile</span>
+                    </a>
+                    <a href="cart.html" class="flex flex-col items-center">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm">Cart</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Track Order Content -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Track Your Order</h1>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8 max-w-xl mx-auto">
+            <p class="text-gray-700 mb-4 text-center">Enter your Order ID or Tracking Number below to check its status.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="trackingNumber" placeholder="Enter Order ID or Tracking Number" 
+                       class="flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700">
+                <button onclick="trackOrder()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                    Track Order
+                </button>
+            </div>
+            <div id="trackingMessage" class="mt-4 text-red-600 text-center hidden">
+                Please enter a valid Order ID or Tracking Number.
+            </div>
+        </div>
+
+        <div id="orderStatus" class="hidden bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Order Details</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <!-- Order Summary -->
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2">Order Summary</h3>
+                    <p class="text-gray-600"><strong>Order ID:</strong> <span id="displayOrderId" class="text-gray-800"></span></p>
+                    <p class="text-gray-600"><strong>Order Date:</strong> <span id="displayOrderDate" class="text-gray-800"></span></p>
+                    <p class="text-gray-600"><strong>Total Amount:</strong> <span id="displayTotalAmount" class="text-gray-800"></span></p>
+                    <p class="text-gray-600"><strong>Payment Method:</strong> <span id="displayPaymentMethod" class="text-gray-800"></span></p>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2">Shipping Address</h3>
+                    <p id="displayShippingName" class="text-gray-800 font-medium"></p>
+                    <p id="displayShippingAddress1" class="text-gray-700"></p>
+                    <p id="displayShippingAddress2" class="text-gray-700"></p>
+                    <p id="displayShippingCityStateZip" class="text-gray-700"></p>
+                    <p id="displayShippingCountry" class="text-gray-700"></p>
+                    <p id="displayShippingPhone" class="text-gray-700"></p>
+                </div>
+
+                <!-- Current Status -->
+                <div class="order-status-card p-4 rounded-lg bg-blue-50">
+                    <p class="text-gray-600"><strong>Current Status:</strong></p>
+                    <p id="displayStatus" class="text-blue-700 font-semibold text-xl mb-2"></p>
+                    <p class="text-gray-600"><strong>Estimated Delivery:</strong> <span id="displayDeliveryDate" class="text-gray-800"></span></p>
+                </div>
+            </div>
+
+            <!-- Ordered Items -->
+            <div class="mb-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Items in Your Order:</h3>
+                <div id="orderedItems" class="space-y-4">
+                    <!-- Ordered items will be added here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Shipment History -->
+            <div class="mb-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Shipment History:</h3>
+                <div id="shipmentHistory" class="space-y-4">
+                    <!-- Shipment history items will be added here by JavaScript -->
+                </div>
+            </div>
+
+            <div class="mt-6 text-center border-t pt-6 border-gray-200">
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Need More Help?</h3>
+                <p class="text-gray-700 mb-4">If you have any questions about your order, please don't hesitate to reach out to our customer service team.</p>
+                <a href="customer-service.html" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300 inline-flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.76-1.39L2 17l1.63-1.63a8.042 8.042 0 01-1.39-4.76c0-4.418 3.582-8 8-8s8 3.582 8 8zM10 5a1 1 0 011 1v3a1 1 0 11-2 0V6a1 1 0 011-1zm0 8a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
+                    </svg>
+                    Contact Customer Service
+                </a>
+            </div>
+        </div>
+    </div>
+
+     <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-white text-lg font-medium mb-4">About TechCart</h3>
+                    <ul class="space-y-2">
+                        <li><a href="aboutus.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="carrers.html" class="hover:text-white">Careers</a></li>
+                        <li><a href="press.html" class="hover:text-white">Press</a></li>
+                        <li><a href="teachcaetcares.html" class="hover:text-white">TechCart Cares</a></li>
+                    </ul>
+                </div>
+
+                <!-- Help -->
+                <div>
+                    <h3 class="text-white text-lg font-medium mb-4">Help</h3>
+                    <ul class="space-y-2">
+                        <li><a href="payments.html" class="hover:text-white">Payments</a></li>
+                        <li><a href="shipping.html" class="hover:text-white">Shipping</a></li>
+                        <li><a href="returns.html" class="hover:text-white">Returns</a></li>
+                        <li><a href="fqa.html" class="hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Policy -->
+                <div>
+                    <h3 class="text-white text-lg font-medium mb-4">Policy</h3>
+                    <ul class="space-y-2">
+                        <li><a href="returnpolicy.html" class="hover:text-white">Return Policy</a></li>
+                        <li><a href="termsofuse.html" class="hover:text-white">Terms of Use</a></li>
+                        <li><a href="security.html" class="hover:text-white">Security</a></li>
+                        <li><a href="privacy.html" class="hover:text-white">Privacy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Connect -->
+                <div>
+                    <h3 class="text-white text-lg font-medium mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <div>
+                        <h4 class="text-white text-lg font-medium mb-2">Download App</h4>
+                        <div class="flex space-x-2">
+                            <a href="#">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d9a45b90-bd1b-4718-828c-852666b24609.png" alt="Download on Google Play" class="h-10">
+                            </a>
+                            <a href="#">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/28c31333-dfbe-4a7b-abea-3e142a60a800.png" alt="Download on App Store" class="h-10">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
+                <p>© 2023 TechCart. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function trackOrder() {
+            const trackingNumber = document.getElementById('trackingNumber').value.trim();
+            const orderStatusDiv = document.getElementById('orderStatus');
+            const trackingMessage = document.getElementById('trackingMessage');
+            
+            const displayOrderId = document.getElementById('displayOrderId');
+            const displayOrderDate = document.getElementById('displayOrderDate');
+            const displayTotalAmount = document.getElementById('displayTotalAmount');
+            const displayPaymentMethod = document.getElementById('displayPaymentMethod');
+            const displayShippingName = document.getElementById('displayShippingName');
+            const displayShippingAddress1 = document.getElementById('displayShippingAddress1');
+            const displayShippingAddress2 = document.getElementById('displayShippingAddress2');
+            const displayShippingCityStateZip = document.getElementById('displayShippingCityStateZip');
+            const displayShippingCountry = document.getElementById('displayShippingCountry');
+            const displayShippingPhone = document.getElementById('displayShippingPhone');
+            const displayStatus = document.getElementById('displayStatus');
+            const displayDeliveryDate = document.getElementById('displayDeliveryDate');
+            const orderedItems = document.getElementById('orderedItems');
+            const shipmentHistory = document.getElementById('shipmentHistory');
+
+            // Clear previous results
+            orderStatusDiv.classList.add('hidden');
+            trackingMessage.classList.add('hidden');
+            orderedItems.innerHTML = ''; // Clear previous items
+            shipmentHistory.innerHTML = ''; // Clear previous history
+
+            if (trackingNumber === '') {
+                trackingMessage.textContent = 'Please enter an Order ID or Tracking Number.';
+                trackingMessage.classList.remove('hidden');
+                return;
+            }
+
+            // Simulate API call or database lookup
+            // In a real application, you would send this trackingNumber to your backend
+            // and fetch actual order details.
+            setTimeout(() => {
+                let orderData;
+                if (trackingNumber === 'TECH12345') {
+                    orderData = {
+                        orderId: 'TECH12345',
+                        orderDate: '2023-07-20',
+                        totalAmount: '₹38,999',
+                        paymentMethod: 'Credit Card',
+                        shippingAddress: {
+                            name: 'John Doe',
+                            address1: '123 Tech Lane',
+                            address2: 'Apt 4B',
+                            city: 'Bangalore',
+                            state: 'Karnataka',
+                            zip: '560001',
+                            country: 'India',
+                            phone: '+91 98765 43210'
+                        },
+                        status: 'Out for Delivery',
+                        deliveryDate: '2023-07-28',
+                        items: [
+                            { name: 'AMD Ryzen 9 5900X', quantity: 1, price: '₹38,999', image: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8d107505-1654-41f7-b33d-0af8317f35eb.png' }
+                        ],
+                        history: [
+                            { date: '2023-07-20', time: '10:00 AM', location: 'Warehouse, Bangalore', event: 'Order Placed' },
+                            { date: '2023-07-21', time: '03:30 PM', location: 'Processing Center, Chennai', event: 'Shipped from origin' },
+                            { date: '2023-07-22', time: '09:15 AM', location: 'Local Hub, Delhi', event: 'In Transit to destination' },
+                            { date: '2023-07-23', time: '08:00 AM', location: 'Delivery Station, Your City', event: 'Out for Delivery' }
+                        ]
+                    };
+                } else if (trackingNumber === 'TECH67890') {
+                    orderData = {
+                        orderId: 'TECH67890',
+                        orderDate: '2023-07-15',
+                        totalAmount: '₹81,998',
+                        paymentMethod: 'Net Banking',
+                        shippingAddress: {
+                            name: 'Jane Smith',
+                            address1: '456 Component Road',
+                            address2: 'Building C',
+                            city: 'Pune',
+                            state: 'Maharashtra',
+                            zip: '411001',
+                            country: 'India',
+                            phone: '+91 99887 76655'
+                        },
+                        status: 'Delivered',
+                        deliveryDate: '2023-07-25',
+                        items: [
+                            { name: 'NVIDIA GeForce RTX 3080', quantity: 1, price: '₹71,999', image: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/61515e4b-b539-43cd-a656-2d58fc29240d.png' },
+                            { name: 'Samsung 980 Pro 1TB SSD', quantity: 1, price: '₹9,999', image: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8dce50fe-0d1e-4816-b3a6-47f5d8537fe0.png' }
+                        ],
+                        history: [
+                            { date: '2023-07-15', time: '11:30 AM', location: 'Warehouse, Mumbai', event: 'Order Placed' },
+                            { date: '2023-07-16', time: '02:00 PM', location: 'Processing Center, Mumbai', event: 'Shipped from origin' },
+                            { date: '2023-07-18', time: '07:00 PM', location: 'Transit Hub, Hyderabad', event: 'In Transit to destination' },
+                            { date: '2023-07-20', time: '09:00 AM', location: 'Delivery Station, Pune', event: 'Out for Delivery' },
+                            { date: '2023-07-21', time: '01:00 PM', location: 'Customer Address, Pune', event: 'Delivered' }
+                        ]
+                    };
+                } else if (trackingNumber === 'TECH99999') {
+                    orderData = {
+                        orderId: 'TECH99999',
+                        orderDate: '2023-07-25',
+                        totalAmount: '₹14,999',
+                        paymentMethod: 'UPI',
+                        shippingAddress: {
+                            name: 'Alice Wonderland',
+                            address1: '789 Gaming Street',
+                            address2: '',
+                            city: 'Delhi',
+                            state: 'Delhi',
+                            zip: '110001',
+                            country: 'India',
+                            phone: '+91 87654 32109'
+                        },
+                        status: 'Processing',
+                        deliveryDate: '2023-08-05',
+                        items: [
+                            { name: 'Intel Core i9', quantity: 1, price: '₹14,999', image: 'https://placehold.co/60x60/e0e0e0/333333?text=CPU' }
+                        ],
+                        history: [
+                            { date: '2023-07-25', time: '09:00 AM', location: 'Order Received', event: 'Order Placed' },
+                            { date: '2023-07-25', time: '02:00 PM', location: 'Payment Confirmed', event: 'Payment Processed' },
+                            { date: '2023-07-26', time: '10:00 AM', location: 'Warehouse, Delhi', event: 'Processing' }
+                        ]
+                    };
+                }
+                else {
+                    orderData = null; // Order not found
+                }
+
+                if (orderData) {
+                    displayOrderId.textContent = orderData.orderId;
+                    displayOrderDate.textContent = orderData.orderDate;
+                    displayTotalAmount.textContent = orderData.totalAmount;
+                    displayPaymentMethod.textContent = orderData.paymentMethod;
+                    
+                    displayShippingName.textContent = orderData.shippingAddress.name;
+                    displayShippingAddress1.textContent = orderData.shippingAddress.address1;
+                    displayShippingAddress2.textContent = orderData.shippingAddress.address2;
+                    displayShippingCityStateZip.textContent = `${orderData.shippingAddress.city}, ${orderData.shippingAddress.state} - ${orderData.shippingAddress.zip}`;
+                    displayShippingCountry.textContent = orderData.shippingAddress.country;
+                    displayShippingPhone.textContent = `Phone: ${orderData.shippingAddress.phone}`;
+
+                    displayStatus.textContent = orderData.status;
+                    displayDeliveryDate.textContent = orderData.deliveryDate;
+
+                    // Populate ordered items
+                    orderData.items.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'flex items-center space-x-4 p-3 border rounded-lg bg-white';
+                        itemDiv.innerHTML = `
+                            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-contain rounded">
+                            <div>
+                                <p class="font-medium text-gray-800">${item.name}</p>
+                                <p class="text-sm text-gray-600">Quantity: ${item.quantity}</p>
+                                <p class="text-sm font-semibold text-gray-700">Price: ${item.price}</p>
+                            </div>
+                        `;
+                        orderedItems.appendChild(itemDiv);
+                    });
+
+                    // Populate shipment history
+                    orderData.history.forEach(item => {
+                        const historyItem = document.createElement('div');
+                        historyItem.className = 'timeline-item';
+                        historyItem.innerHTML = `
+                            <p class="text-gray-800 font-medium">${item.event}</p>
+                            <p class="text-sm text-gray-600">${item.date} ${item.time} - ${item.location}</p>
+                        `;
+                        shipmentHistory.appendChild(historyItem);
+                    });
+
+                    orderStatusDiv.classList.remove('hidden');
+                } else {
+                    trackingMessage.textContent = `No order found for ID: "${trackingNumber}". Please check the number and try again.`;
+                    trackingMessage.classList.remove('hidden');
+                }
+            }, 500); // Simulate a network delay
+        }
+    </script>
+</body>
+</html>
